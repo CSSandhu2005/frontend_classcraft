@@ -1,0 +1,1 @@
+Creating ClassCraft AI For HackerRing 24Hrs HackaThon . 2025 . 
