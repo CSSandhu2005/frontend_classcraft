@@ -12,7 +12,9 @@ export default function DashboardPage() {
 
   useEffect(() => {
     // Check if user has selected a role
-    const storedRole = localStorage.getItem("userRole") as "student" | "teacher";
+    const storedRole = localStorage.getItem("userRole") as
+      | "student"
+      | "teacher";
     if (storedRole) {
       setRole(storedRole);
     } else {
@@ -41,6 +43,7 @@ export default function DashboardPage() {
         <h1 className="text-3xl font-bold text-white">
           {role === "student" ? "🎓 Student" : "👩‍🏫 Teacher"} Dashboard
         </h1>
+
         <button
           onClick={handleLogout}
           className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
@@ -57,7 +60,9 @@ export default function DashboardPage() {
             localStorage.setItem("userRole", "student");
           }}
           className={`px-4 py-2 rounded-lg ${
-            role === "student" ? "bg-blue-600 text-white" : "bg-gray-700 text-gray-300"
+            role === "student"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-700 text-gray-300"
           }`}
         >
           Student View
@@ -68,7 +73,9 @@ export default function DashboardPage() {
             localStorage.setItem("userRole", "teacher");
           }}
           className={`px-4 py-2 rounded-lg ${
-            role === "teacher" ? "bg-green-600 text-white" : "bg-gray-700 text-gray-300"
+            role === "teacher"
+              ? "bg-green-600 text-white"
+              : "bg-gray-700 text-gray-300"
           }`}
         >
           Teacher View

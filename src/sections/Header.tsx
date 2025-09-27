@@ -6,10 +6,12 @@ import { Button } from "@/components/Button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
   const [user, setUser] = useState<any>(null);
   const [username, setUsername] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     async function loadUser() {
@@ -18,29 +20,30 @@ export const Header = () => {
       setUser(currentUser);
 
       if (currentUser) {
-        const { data: userData } = await supabase
-          .from("Users_Table")
+        const { data: userData, error } = await supabase
+          .from("users_table") // ✅ fixed table name
           .select("username")
           .eq("id", currentUser.id)
           .single();
 
-        if (userData) setUsername(userData.username);
+        if (!error && userData) setUsername(userData.username);
       }
     }
 
     loadUser();
 
-    // 🔄 Listen for login/logout
+    // 🔄 Listen for login/logout changes
     const { data: listener } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         setUser(session?.user ?? null);
         if (session?.user) {
-          const { data: userData } = await supabase
-            .from("Users_Table")
+          const { data: userData, error } = await supabase
+            .from("users_table")
             .select("username")
             .eq("id", session.user.id)
             .single();
-          setUsername(userData?.username ?? null);
+
+          setUsername(!error && userData ? userData.username : null);
         } else {
           setUsername(null);
         }
@@ -64,7 +67,7 @@ export const Header = () => {
             <ClassLogo className="h-6 w-6" />
           </div>
 
-          {/* ✅ Keep existing Nav items */}
+          {/* Nav Items */}
           <div className="hidden md:flex">
             <nav className="flex gap-8 text-white/70">
               <a href="#" className="hover:text-white transition-all">Features</a>
@@ -74,7 +77,7 @@ export const Header = () => {
             </nav>
           </div>
 
-          {/* ✅ Auth Section */}
+          {/* Auth Section */}
           <div className="flex gap-4 items-center">
             {user ? (
               <>
@@ -84,6 +87,7 @@ export const Header = () => {
                 <Button
                   onClick={async () => {
                     await supabase.auth.signOut();
+                    router.push("/"); // ✅ redirect to landing page
                   }}
                 >
                   Sign Out
