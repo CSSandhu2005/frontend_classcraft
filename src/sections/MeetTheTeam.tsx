@@ -34,7 +34,7 @@ const people = [
 
 export function MeetTheTeam() {
   return (
-    <div className="container flex justify-start items-center">
+    <div className="container flex flex-col justify-start items-center gap-4 md:flex-row">
       <h2 className="text-nowrap text-2xl tracking-tighter font-semibold text-center">Meet The Team</h2>
       <div className="flex flex-row items-center justify-center pr-4 ">
         <AnimatedTooltip items={people} />

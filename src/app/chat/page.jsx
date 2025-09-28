@@ -59,8 +59,8 @@ export default function SidebarDemo() {
       ),
     },
     {
-      label: "Logout",
-      href: "/",
+      label: "Go Back",
+      href: "/dashboard",
       icon: (
         <IconArrowLeft className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
@@ -186,7 +186,7 @@ const Dashboard = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-4xl md:text-5xl font-bold text-gray-800 mb-4"
           >
-            Hi there, what can I help with?
+            Chat With Our AI ChatBot !
           </motion.h2>
           <motion.div
             initial={{ opacity: 0 }}
@@ -253,7 +253,7 @@ const Dashboard = () => {
                 <ChefHat className="h-6 w-6 text-green-600" />
               </motion.div>
               <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                Research Me
+                Chat With Our AI !
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 Deep research and analysis capabilities for comprehensive insights
