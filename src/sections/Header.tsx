@@ -94,7 +94,7 @@ export const Header = () => {
                 </Button>
               </>
             ) : (
-              <Link href="/dashboard">
+              <Link href="#">
                 <Button>Enter App</Button>
               </Link>
             )}
